@@ -14,7 +14,7 @@
         },
         {
             damping: 1,
-            stiffness: 0.15,
+            stiffness: 0.03,
         }
     );
     let robotx = 0;
@@ -33,11 +33,13 @@
             x: 0,
             y: 0,
         };
-        const dTime = 0.2;
+        const dTime = 0.5;
         const int2 = setInterval(() => {
-            robotDelta.set({
-                x: (robotx - lastMousePos.x) / dTime,
-                y: (roboty - lastMousePos.y) / dTime,
+            robotDelta.update(() => {
+                return {
+                    x: (robotx - lastMousePos.x) / dTime,
+                    y: (roboty - lastMousePos.y) / dTime,
+                };
             });
 
             lastMousePos.x = robotx;
