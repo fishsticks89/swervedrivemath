@@ -14,7 +14,7 @@
         },
         {
             damping: 1,
-            stiffness: 0.03,
+            stiffness: 0.05,
         }
     );
     let robotx = 0;
@@ -49,7 +49,7 @@
         const interval = setInterval(() => {
             const now = performance.now();
 
-            const rot = Math.sin(now / 1000) * 10;
+            const rot = Math.sin(now / 5000 - Math.PI) * 12;
 
             robotRotation = rot > 0 ? rot : 0;
             robotOrientation += robotRotation * dTime;
