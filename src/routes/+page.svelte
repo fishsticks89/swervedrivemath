@@ -14,7 +14,7 @@
         },
         {
             damping: 1,
-            stiffness: 0.3,
+            stiffness: 0.15,
         }
     );
     let robotx = 0;
@@ -33,7 +33,7 @@
             x: 0,
             y: 0,
         };
-        const dTime = 1;
+        const dTime = 0.2;
         const int2 = setInterval(() => {
             robotDelta.set({
                 x: (robotx - lastMousePos.x) / dTime,
@@ -44,16 +44,14 @@
             lastMousePos.y = roboty;
         }, dTime);
 
-        let lastRotTime = performance.now();
         const interval = setInterval(() => {
             const now = performance.now();
-            const dTime = now - lastRotTime;
 
-            robotRotation = Math.sin(now / 1000) / 30;
+            const rot = Math.sin(now / 1000) * 10;
+
+            robotRotation = rot > 0 ? rot : 0;
             robotOrientation += robotRotation * dTime;
-
-            lastRotTime = now;
-        });
+        }, dTime);
         onDestroy(() => {
             clearInterval(int2);
             clearInterval(interval);
